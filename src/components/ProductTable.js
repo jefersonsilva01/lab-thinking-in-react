@@ -1,13 +1,15 @@
 import React from "react";
+import ProductRow from './ProductRow';
 
-function ProductTable() {
+function ProductTable({ data }) {
   return (
     <>
       <table
         style={
           {
             margin: "48px auto 0",
-            width: "95%"
+            width: "95%",
+            padding: "0"
           }
         }>
         <thead
@@ -18,30 +20,29 @@ function ProductTable() {
             }
           }>
           <tr>
-            <label
+            <td
               style={
                 {
-                  verticalAlign: "middle",
                   display: "inline-block",
-                  height: "100%",
-                  width: "50%",
+                  width: "45%",
                   lineHeight: "3",
                   fontSize: "1.5em",
                 }
-              }>Name</label>
-            <label
+              }>Name</td>
+            <td
               style={
                 {
-                  verticalAlign: "middle",
                   display: "inline-block",
-                  height: "100%",
-                  width: "50%",
+                  width: "45%",
                   lineHeight: "3",
                   fontSize: "1.5em",
                 }
-              }>Price</label>
+              }>Price</td>
           </tr>
         </thead>
+        <tbody>
+          <ProductRow data={data} />
+        </tbody>
       </table>
     </>
   )

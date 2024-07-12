@@ -1,10 +1,25 @@
 import React from 'react';
 
-function SearchBar() {
+function SearchBar(props) {
+
+  const handleSearch = e => {
+    e.preventDefault()
+    props.searchProd(e.target.value)
+  },
+
+    handleCheck = e => {
+      // e.preventDefault()
+      console.log(e.target.checked)
+      e.target.checked
+        ? props.checkProd(true)
+        : props.checkProd(false)
+    }
+
   return (
     <>
       <p>Search</p>
       <input
+        onChange={(e) => { handleSearch(e) }}
         type="text"
         style={
           {
@@ -18,6 +33,7 @@ function SearchBar() {
           }
         } />
       <input
+        onChange={(e) => { handleCheck(e) }}
         type="checkbox"
         name="stock"
         id="stock"
