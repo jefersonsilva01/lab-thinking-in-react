@@ -7,46 +7,43 @@ import SearchBar from './SearchBar';
 import ProductTable from "./ProductTable";
 
 function ProductsPage() {
-  const [products, setProducts] = useState(jsonData),
 
-    search = inputProduct => {
-      if (inputProduct.length === 0) return setProducts(jsonData)
+  const [productsData, setProducts] = useState(
+    {
+      products: jsonData,
+      inputSearch: '',
+      inputCheck: false
+    }
+  ),
 
-      const productResults = [],
-        newProd = [...products]
+    change = newProdData => {
+      let updateProducts
 
-      newProd.map(item => {
-        return item.name
-          .toLowerCase()
-          .includes(inputProduct.toLowerCase())
-          && productResults.push(item);
-      })
+      newProdData.inputCheck
+        ? updateProducts = newProdData.products
+          .filter(prod => (prod.name.toLowerCase()
+            .includes(newProdData.inputSearch.toLowerCase()) && prod.inStock) && prod)
 
-      productResults.length > 0
-        ? setProducts(productResults)
-        : setProducts([])
+        : updateProducts = newProdData.products
+          .filter(prod => (prod.name.toLowerCase()
+            .includes(newProdData.inputSearch.toLowerCase())) && prod);
+
+      setProducts({ ...newProdData, products: updateProducts, });
     },
 
-    check = (event) => {
-      if (!event) return setProducts(jsonData)
+    filters = value => {
+      typeof value === 'boolean'
+        ? productsData.inputCheck = value
+        : productsData.inputSearch = value;
 
-      const productResults = [],
-        newProd = [...products]
-
-      newProd.map(item => {
-        return item.inStock && productResults.push(item);
-      })
-
-      productResults.length > 0
-        ? setProducts(productResults)
-        : setProducts([]);
+      change({ ...productsData, products: jsonData });
     }
 
   return (
     <div>
       <h1>IronStore</h1>
-      <SearchBar checkProd={check} searchProd={search} />
-      <ProductTable data={products} />
+      <SearchBar filterProd={filters} />
+      <ProductTable data={productsData.products} />
     </div>
   )
 }

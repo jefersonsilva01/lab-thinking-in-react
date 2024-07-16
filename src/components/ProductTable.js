@@ -19,23 +19,32 @@ function ProductTable({ data }) {
               height: "44px"
             }
           }>
-          <tr>
+          <tr style={
+            {
+              display: "flex",
+              justifyContent: "space-evenly",
+              borderBottom: "2px solid #00ddcc",
+
+            }
+          }>
             <td
               style={
                 {
                   display: "inline-block",
-                  width: "45%",
+                  width: "15%",
                   lineHeight: "3",
                   fontSize: "1.5em",
+                  "textAlign": "left",
                 }
               }>Name</td>
             <td
               style={
                 {
                   display: "inline-block",
-                  width: "45%",
+                  width: "15%",
                   lineHeight: "3",
                   fontSize: "1.5em",
+                  "textAlign": "left",
                 }
               }>Price</td>
           </tr>
